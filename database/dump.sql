@@ -1,0 +1,11 @@
+CREATE TABLE test (
+    id INT PRIMARY KEY,
+    name VARCHAR
+);
+
+CREATE TABLE test2 (
+    id INT PRIMARY KEY,
+    name VARCHAR,
+    value float,
+    active boolean
+);

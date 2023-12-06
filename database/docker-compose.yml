@@ -1,0 +1,13 @@
+version: "3"
+services:
+  postgres_test:
+    image: postgres:16.1
+    container_name: postgres_test
+    environment:
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_USER=khoildm
+      - POSTGRES_DB=test
+    volumes:
+      - ./dump.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 5432:5432
