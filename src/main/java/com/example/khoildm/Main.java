@@ -51,21 +51,21 @@ public class Main {
 
             if (repo.connect()) {
 
-                DMLQuery query = new DMLQuery().from("test2").select("*").orderBy("id");
+                // DMLQuery query = new DMLQuery().from("test2").select("*").orderBy("id");
 
-                AbstractQueryResult res = repo.execute(query);
-                List<Test2> resL = res.getResultList(Test2.class);
-                for (Test2 i : resL) {
-                    System.out.printf("%d: %s, \n", i.id, i.name);
-                }
+                // AbstractQueryResult res = repo.execute(query);
+                // List<Test2> resL = res.getResultList(Test2.class);
+                // for (Test2 i : resL) {
+                //     System.out.printf("%d: %s, \n", i.id, i.name);
+                // }
 
-                DMLQuery query2 = new DMLQuery().from("test2").select("*");
+                // DMLQuery query2 = new DMLQuery().from("test2").select("*");
 
-                AbstractQueryResult res2 = repo.execute(query2);
-                List<Test2> resL2 = res2.getResultList(Test2.class);
-                for (Test2 i : resL2) {
-                    System.out.printf("%d: %s, \n", i.id, i.name);
-                }
+                // AbstractQueryResult res2 = repo.execute(query2);
+                // List<Test2> resL2 = res2.getResultList(Test2.class);
+                // for (Test2 i : resL2) {
+                //     System.out.printf("%d: %s, \n", i.id, i.name);
+                // }
 
                 // Condition c = new ConditionBuilder().where("active", "=", true);
                 // DMLQuery query2 = new DMLQuery().from("test2").select("*").where(c);
@@ -91,6 +91,34 @@ public class Main {
                 // System.out.printf("%d: %s\n", i.id, i.name);
                 // }
 
+
+                // Condition condition = new ConditionBuilder().where("id", "=", 1);
+
+                // DMLQuery delete = new DMLQuery().from("test").delete().where(condition);
+                // repo.execute(delete);
+
+                 Map<String, Object> number1 = new HashMap<>();
+                 number1.put("id", 1);
+                 number1.put("name", "thinh");
+
+                 DMLQuery insert = new DMLQuery().from("test").insert(number1);
+                 repo.execute(insert);
+
+                DMLQuery query = new DMLQuery().from("test").select("*");
+
+                AbstractQueryResult res = repo.execute(query);
+                List<Test> resL = res.getResultList(Test.class);
+                for (Test i : resL) {
+                    System.out.printf("%d: %s, \n", i.id, i.name);
+                }
+
+                
+
+                // Map<String, Object> number2 = new HashMap<>();
+                // number2.put("name", "khoi");
+                // DMLQuery update = new DMLQuery().from("test").update(number2).where(condition);
+                // repo.execute(update);
+                
             }
         } catch (Exception e) {
             e.printStackTrace();
