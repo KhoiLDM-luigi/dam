@@ -27,6 +27,7 @@ jobs:
         java-version: '21'
         distribution: 'oracle'
         cache: maven
-    - run: java -cp java Main
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - name: Run Main file
+      run: java src/main/java/com/example/khoildm/Main.java
