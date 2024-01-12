@@ -1,12 +1,16 @@
 package com.example.khoildm;
 
-import com.example.khoildm.dam.ORM.Entity;
+@Table(name = "users")
+public class User {
+    @Column(name = "id")
+    public Integer id;
 
-public class User extends Entity {
-    public int id;
+    @Column(name = "name")
     public String name;
 
     public User() {
 
     }
+
+
 }

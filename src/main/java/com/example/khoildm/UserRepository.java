@@ -1,5 +1,6 @@
 package com.example.khoildm;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,13 +22,22 @@ public class UserRepository extends Repository<User> {
     }
 
     @Override
-    public User find(Long id) {
+    public User find(Integer id) {
         try {
             SQLConnectorFactory factory = new PostgreSQLConnectorFactory();
             DefaultRepository repo = new DefaultRepository(factory, "localhost", "5432", "test", "khoildm", "123");
             if (repo.connect()) {
-                Condition c = new ConditionBuilder().where("id", "=", id);
-                DMLQuery query = new DMLQuery().from("users").select("*").where(c);
+                // Get table name from User class annotation
+                Table table = User.class.getAnnotation(Table.class);
+                String tableName = (table != null) ? table.name() : "users";
+                
+                // Get column name from id field annotation
+                Field idField = User.class.getDeclaredField("id");
+                Column column = idField.getAnnotation(Column.class);
+                String columnName = (column != null) ? column.name() : "id";
+
+                Condition c = new ConditionBuilder().where(columnName, "=", id);
+                DMLQuery query = new DMLQuery().from(tableName).select("*").where(c);
                 AbstractQueryResult res = repo.execute(query);
                 List<User> resL = res.getResultList(User.class);
                 return resL.get(0);
@@ -45,7 +55,11 @@ public class UserRepository extends Repository<User> {
             SQLConnectorFactory factory = new PostgreSQLConnectorFactory();
             DefaultRepository repo = new DefaultRepository(factory, "localhost", "5432", "test", "khoildm", "123");
             if (repo.connect()) {
-                DMLQuery query = new DMLQuery().from("users").select("*");
+                // Get table name from User class annotation
+                Table table = User.class.getAnnotation(Table.class);
+                String tableName = (table != null) ? table.name() : "users";
+
+                DMLQuery query = new DMLQuery().from(tableName).select("*");
                 AbstractQueryResult res = repo.execute(query);
                 List<User> resL = res.getResultList(User.class);
                 return resL;
@@ -63,10 +77,25 @@ public class UserRepository extends Repository<User> {
             SQLConnectorFactory factory = new PostgreSQLConnectorFactory();
             DefaultRepository repo = new DefaultRepository(factory, "localhost", "5432", "test", "khoildm", "123");
             if (repo.connect()) {
+                // Get table name from User class annotation
+                Table table = User.class.getAnnotation(Table.class);
+                String tableName = (table != null) ? table.name() : "users";
+
                 Map<String, Object> columnsMap = new HashMap<>();
-                columnsMap.put("id", entity.getId());
-                columnsMap.put("name", entity.getName());
-                DMLQuery query = new DMLQuery().from("users").insert(columnsMap);
+
+                // Get column names and values from User class field annotations
+                for (Field field : entity.getClass().getDeclaredFields()) {
+                    Column column = field.getAnnotation(Column.class);
+                    
+                    if (column != null) {
+                        String columnName = column.name();
+                        field.setAccessible(true);
+                        Object value = field.get(entity);
+                        columnsMap.put(columnName, value);
+                    }
+                }
+
+                DMLQuery query = new DMLQuery().from(tableName).insert(columnsMap);
                 repo.execute(query);
             }
         } catch (Exception e) {
@@ -80,11 +109,30 @@ public class UserRepository extends Repository<User> {
             SQLConnectorFactory factory = new PostgreSQLConnectorFactory();
             DefaultRepository repo = new DefaultRepository(factory, "localhost", "5432", "test", "khoildm", "123");
             if (repo.connect()) {
+                 // Get table name from User class annotation
+                Table table = User.class.getAnnotation(Table.class);
+                String tableName = (table != null) ? table.name() : "users";
+
                 Map<String, Object> columnsMap = new HashMap<>();
-                columnsMap.put("id", entity.getId());
-                columnsMap.put("name", entity.getName());
-                Condition c = new ConditionBuilder().where("id", "=", entity.getId());
-                DMLQuery query = new DMLQuery().from("users").update(columnsMap).where(c);
+                
+                // Get column names and values from User class field annotations
+                for (Field field : User.class.getDeclaredFields()) {
+                    Column column = field.getAnnotation(Column.class);
+                    if (column != null) {
+                        String columnName = column.name();
+                        field.setAccessible(true);
+                        Object value = field.get(entity);
+                        columnsMap.put(columnName, value);
+                    }
+                }
+
+                // Get column name from id field annotation
+                Field idField = User.class.getDeclaredField("id");
+                Column idColumn = idField.getAnnotation(Column.class);
+                String idColumnName = (idColumn != null) ? idColumn.name() : "id";
+
+                Condition c = new ConditionBuilder().where(idColumnName, "=", entity.id);
+                DMLQuery query = new DMLQuery().from(tableName).update(columnsMap).where(c);
                 repo.execute(query);
             }
         } catch (Exception e) {
@@ -94,16 +142,25 @@ public class UserRepository extends Repository<User> {
 
     @Override
     public void delete(Long id) {
-        try {
-            SQLConnectorFactory factory = new PostgreSQLConnectorFactory();
-            DefaultRepository repo = new DefaultRepository(factory, "localhost", "5432", "test", "khoildm", "123");
-            if (repo.connect()) {
-                Condition c = new ConditionBuilder().where("id", "=", id);
-                DMLQuery query = new DMLQuery().from("users").delete().where(c);
-                repo.execute(query);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // try {
+        //     SQLConnectorFactory factory = new PostgreSQLConnectorFactory();
+        //     DefaultRepository repo = new DefaultRepository(factory, "localhost", "5432", "test", "khoildm", "123");
+        //     if (repo.connect()) {
+        //         // Get table name from User class annotation
+        //         Table table = User.class.getAnnotation(Table.class);
+        //         String tableName = (table != null) ? table.name() : "users";
+                
+        //         // Get column name from id field annotation
+        //         Field idField = User.class.getDeclaredField("id");
+        //         Column column = idField.getAnnotation(Column.class);
+        //         String columnName = (column != null) ? column.name() : "id";
+                
+        //         Condition c = new ConditionBuilder().where(columnName, "=", id);
+        //         DMLQuery query = new DMLQuery().from(tableName).delete().where(c);
+        //         repo.execute(query);
+        //     }
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // }
     }
 }

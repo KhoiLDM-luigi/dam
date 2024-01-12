@@ -4,14 +4,14 @@ import java.util.List;
 
 import com.example.khoildm.dam.connector.PostgreSQLConnector;
 
-public abstract class Repository<T extends Entity> {
+public abstract class Repository<T> {
     protected PostgreSQLConnector connector;
 
     public Repository(PostgreSQLConnector connector) {
         this.connector = connector;
     }
 
-    public abstract T find(Long id);
+    public abstract T find(Integer id);
 
     public abstract List<T> findAll();
 
