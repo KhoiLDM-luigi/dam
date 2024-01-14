@@ -29,5 +29,5 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: Run the project
-      run: java -jar target/*.jar
+#    - name: Run the project
+#      run: java -jar target/*.jar
