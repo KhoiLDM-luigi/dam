@@ -25,7 +25,7 @@ public class SelectQuery extends DMLQuery {
     public String raw() {
         StringBuilder sb = new StringBuilder(this.command + " ");
 
-        if (this.columns != null) {
+        if (this.columns != null && this.columns.length != 0) {
             sb.append(String.join(", ", this.columns));
         } else
             sb.append("*");

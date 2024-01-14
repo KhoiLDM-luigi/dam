@@ -1,4 +1,4 @@
-package com.example.khoildm;
+package com.example.khoildm.ORM.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,8 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD) //can use in field only.
+@Target(ElementType.FIELD)
 public @interface Column {
-    // should contain the name of the column in the database
-    String name() default "";
+    String name() default ""; // Specify the column name
+
+    boolean nullable() default true; // Specify if the column is nullable
 }
