@@ -39,12 +39,11 @@ public class ConnectionPool {
         return instance;
     }
 
-    static public ConnectionPool getInstance(Class<? extends SQLConnectorFactory> connector, SQLConnConfig config,
-            int maxConnection)
+    static public void getInstance(Class<? extends SQLConnectorFactory> connector, SQLConnConfig config,
+                                   int maxConnection)
             throws Exception {
         if (instance == null)
             instance = new ConnectionPool(connector, config, maxConnection);
-        return instance;
     }
 
     public DefaultRepository getRepository() {

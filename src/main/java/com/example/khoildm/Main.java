@@ -1,5 +1,6 @@
 package com.example.khoildm;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.example.khoildm.ORM.conn_pool.ConnectionPool;
@@ -15,40 +16,40 @@ public class Main {
 
             // --- Test ORM 1 ---
 
-            // // Initialize database
-            // ConnectionPool.getInstance(PostgreSQLConnectorFactory.class, config, 5);
-            
-            // // Create repository
-            // TestRepository repo = new TestRepository();
+//            // Initialize database
+//            ConnectionPool.getInstance(PostgreSQLConnectorFactory.class, config, 5);
+//
+//            // Create repository
+//            TestRepository repo = new TestRepository();
+//
+//            // Create a list of Test
+//            List<Test> resL = repo.findAll();
+//
+//            // Print out the list
+//            for (Test i : resL) {
+//                System.out.printf("%d: %s, \n", i.getId(), i.getName());
+//            }
+//
+//            // Create a new entity
+//            Test n1 = new Test();
+//
+//            // Set value for the new entity
+//            n1.setId(1);
+//            n1.setName("hELLO");
+//
+//            // Save the new entity to database
+//            repo.save(n1);
+//
+//            // Print out the list
+//            resL = repo.findAll();
+//            for (Test i : resL) {
+//                System.out.printf("%d: %s, \n", i.getId(), i.getName());
+//            }
+//
+//            // Delete the entity from database
+//            repo.delete(n1);
 
-            // // Create a list of Test
-            // List<Test> resL = repo.findAll();
-            
-            // // Print out the list
-            // for (Test i : resL) {
-            //     System.out.printf("%d: %s, \n", i.id, i.name);
-            // }
-
-            // // Create a new entity
-            // Test n1 = new Test();
-
-            // // Set value for the new entity
-            // n1.id = 2;
-            // n1.name = "hELLO";
-
-            // // Save the new entity to database
-            // repo.save(n1);
-
-            // // Print out the list
-            // resL = repo.findAll();
-            // for (Test i : resL) {
-            //     System.out.printf("%d: %s, \n", i.id, i.name);
-            // }
-
-            // // Delete the entity from database
-            // repo.delete(n1);
-
-            // --- Test ORM 2` ---
+            // --- Test ORM 2 ---
             
             // Initialize database
             ConnectionPool.getInstance(PostgreSQLConnectorFactory.class, config, 5);
@@ -61,17 +62,17 @@ public class Main {
 
             // Print out the list
             for (Test2 i : resL) {
-                System.out.printf("%d: %s, \n", i.id, i.name, i.active, i.value);
+                System.out.println(i.getId() + ": " + i.getName() + ", " + i.getActive() + ", " + i.getValue());
             }
             
             // Create a new Entity
             Test2 n2 = new Test2();
             
             // Set value for the new entity
-            n2.name = "Test2";
-            n2.id = 1;
-            n2.active = true;
-            n2.value = 1.5;
+            n2.setId(2);
+            n2.setName("test2");
+            n2.setActive(true);
+            n2.setValue(1.2);
             
             // Save the new entity to database
             repo.save(n2);
@@ -79,14 +80,18 @@ public class Main {
             // Print out the list
             resL = repo.findAll();
             for (Test2 i : resL) {
-                System.out.printf("%d: %s, \n", i.id, i.name, i.active, i.value);
+                System.out.println(i.getId() + ": " + i.getName() + ", " + i.getActive() + ", " + i.getValue());
             }
 
             // Delete the entity from database
             repo.delete(n2);
 
+        } catch (SQLException e) {
+            System.err.println("Database error: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.err.println("Number format error: " + e.getMessage());
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Unexpected error: " + e.getMessage());
         }
     }
 }

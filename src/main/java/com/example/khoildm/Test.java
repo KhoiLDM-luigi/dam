@@ -7,11 +7,27 @@ import com.example.khoildm.ORM.annotations.Column;
 @Entity(schema = "test")
 public class Test {
     @Id
-    public int id;
+    private int id;
     @Column
-    public String name;
+    private String name;
 
     public Test() {
 
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

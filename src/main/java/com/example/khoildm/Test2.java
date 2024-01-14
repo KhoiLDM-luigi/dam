@@ -8,15 +8,47 @@ import com.example.khoildm.ORM.annotations.Id;
 public class Test2 {
 
     @Id
-    public int id;
+    private int id;
     @Column
-    public String name;
+    private String name;
     @Column
-    public double value;
+    private double value;
     @Column
-    public Boolean active;
+    private Boolean active;
 
     public Test2() {
 
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }
