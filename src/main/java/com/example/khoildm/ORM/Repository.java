@@ -6,19 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.example.khoildm.User;
 import com.example.khoildm.ORM.annotations.Column;
 import com.example.khoildm.ORM.annotations.Entity;
 import com.example.khoildm.ORM.annotations.Id;
 import com.example.khoildm.ORM.conn_pool.ConnectionPool;
-import com.example.khoildm.dam.Condition;
 import com.example.khoildm.dam.connector.PostgreSQLConnector;
-import com.example.khoildm.dam.factory.connector.PostgreSQLConnectorFactory;
-import com.example.khoildm.dam.factory.connector.SQLConnectorFactory;
 import com.example.khoildm.dam.query.DMLQuery;
 import com.example.khoildm.dam.repository.AbstractQueryResult;
 import com.example.khoildm.dam.repository.DefaultRepository;
-import com.example.khoildm.dam.where.Where;
 import com.example.khoildm.dam.where.builder.ConditionBuilder;
 
 public abstract class Repository<T> {

@@ -1,10 +1,7 @@
 package com.example.khoildm;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import com.example.khoildm.ORM.Repository;
 import com.example.khoildm.ORM.conn_pool.ConnectionPool;
 import com.example.khoildm.dam.Condition;
 import com.example.khoildm.dam.SQLConnConfig;
@@ -109,51 +106,5 @@ public class Main {
         // // for (Test2 i : resL2) {
         // // System.out.printf("%d: %s\n", i.id, i.name);
         // // }
-
-        // // Map<String, Object> colMap = new HashMap<>();
-        // // colMap.put("active", true);
-
-        // // Condition c2 = new ConditionBuilder().where("active", "=", false);
-
-        // // DMLQuery query3 = new DMLQuery().from("test2").update(colMap).where(c2);
-
-        // // repo.execute(query3);
-
-        // // AbstractQueryResult res3 = repo.execute(query2);
-        // // List<Test2> resL3 = res3.getResultList(Test2.class);
-        // // for (Test2 i : resL3) {
-        // // System.out.printf("%d: %s\n", i.id, i.name);
-        // // }
-
-        // // Condition condition = new ConditionBuilder().where("id", "=", 1);
-
-        // // DMLQuery delete = new DMLQuery().from("test").delete().where(condition);
-        // // repo.execute(delete);
-
-        // Map<String, Object> number1 = new HashMap<>();
-        // number1.put("id", 1);
-        // number1.put("name", "thinh");
-
-        // DMLQuery insert = new DMLQuery().from("test").insert(number1);
-        // repo.execute(insert);
-
-        // DMLQuery query = new DMLQuery().from("test").select("*");
-
-        // AbstractQueryResult res = repo.execute(query);
-        // List<Test> resL = res.getResultList(Test.class);
-        // for (Test i : resL) {
-        // System.out.printf("%d: %s, \n", i.id, i.name);
-        // }
-
-        // // Map<String, Object> number2 = new HashMap<>();
-        // // number2.put("name", "khoi");
-        // // DMLQuery update = new
-        // DMLQuery().from("test").update(number2).where(condition);
-        // // repo.execute(update);
-
-        // }
-        // } catch (Exception e) {
-        // e.printStackTrace();
-        // }
     }
 }
