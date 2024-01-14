@@ -31,15 +31,20 @@ public class InsertQuery extends DMLQuery {
         for (Map.Entry<String, Object> entry : columnsMap.entrySet()) {
             String column = entry.getKey();
             Object value = entry.getValue();
-            columnStringJ.add(column);
-            if (value instanceof String)
+            if (value instanceof String) {
+                columnStringJ.add(column);
                 valueStrJ.add("'" + ((String) value).strip() + "'");
-            if (value instanceof Number)
+            } else if (value instanceof Number) {
+                columnStringJ.add(column);
                 valueStrJ.add(value.toString());
+            } else if (value instanceof Boolean) {
+                columnStringJ.add(column);
+                valueStrJ.add(value.toString());
+            }
         }
-        sb.append(" " + columnStringJ.toString());
+        sb.append(" ").append(columnStringJ);
         sb.append(" VALUES ");
-        sb.append(valueStrJ.toString());
+        sb.append(valueStrJ);
 
         return sb.toString();
     }
