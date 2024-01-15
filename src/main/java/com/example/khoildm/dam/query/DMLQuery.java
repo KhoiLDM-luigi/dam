@@ -47,7 +47,7 @@ public class DMLQuery implements Query {
     }
 
     public DMLQuery orderBy(boolean asc, String... columns) throws Exception {
-        throw new Exception("ORDER BY Is not allowd");
+        throw new Exception("ORDER BY is not allowed in this query");
     }
 
     public DMLQuery orderBy(String... columns) throws Exception {

@@ -5,7 +5,7 @@ import java.util.List;
 public abstract class AbstractQueryResult {
     protected boolean havingResultList = false;
 
-    boolean havingResultList() {
+    public boolean havingResultList() {
         return havingResultList;
     }
 

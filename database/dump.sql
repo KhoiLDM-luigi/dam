@@ -9,3 +9,8 @@ CREATE TABLE test2 (
     value float,
     active boolean
 );
+
+CREATE TABLE USERS (
+    id INT PRIMARY KEY,
+    name VARCHAR
+);
