@@ -47,11 +47,20 @@ public class DMLQuery implements Query {
     }
 
     public DMLQuery orderBy(boolean asc, String... columns) throws Exception {
-        throw new Exception("ORDER BY Is not allowd");
+        throw new Exception("ORDER BY Is not allowed");
     }
 
     public DMLQuery orderBy(String... columns) throws Exception {
         return orderBy(true, columns);
+    }
+
+
+    public DMLQuery groupBy () throws Exception{
+        throw new Exception("Syntax error in GROUP BY clause.");
+    }
+
+    public DMLQuery groupBy (String... comlumns) throws Exception{
+        return groupBy(comlumns);
     }
 
     // query config

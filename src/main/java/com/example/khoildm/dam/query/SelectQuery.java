@@ -6,6 +6,7 @@ public class SelectQuery extends DMLQuery {
     String command = "SELECT";
     String[] columns;
 
+    String[] groupByColumns;
     String[] orderColumns;
     boolean asc;
 
@@ -18,6 +19,11 @@ public class SelectQuery extends DMLQuery {
     public DMLQuery orderBy(boolean asc, String... columns) throws Exception {
         this.asc = asc;
         this.orderColumns = columns;
+        return this;
+    }
+
+    @Override
+    public DMLQuery groupBy() throws Exception {
         return this;
     }
 
@@ -42,6 +48,13 @@ public class SelectQuery extends DMLQuery {
             String order = this.asc ? " ASC" : " DESC";
             sb.append(order);
         }
+        
+        if(this.groupByColumns != null)
+        {
+            sb.append("GROUP BY ");
+            sb.append(String.join(", ", this.groupByColumns));
+        }
+
         return sb.toString();
     }
 }
