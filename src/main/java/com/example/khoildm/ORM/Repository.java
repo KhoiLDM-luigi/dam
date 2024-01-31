@@ -1,11 +1,5 @@
 package com.example.khoildm.ORM;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.example.khoildm.ORM.annotations.Column;
 import com.example.khoildm.ORM.annotations.Entity;
 import com.example.khoildm.ORM.annotations.Id;
@@ -15,6 +9,9 @@ import com.example.khoildm.dam.query.DMLQuery;
 import com.example.khoildm.dam.repository.AbstractQueryResult;
 import com.example.khoildm.dam.repository.DefaultRepository;
 import com.example.khoildm.dam.where.builder.ConditionBuilder;
+
+import java.lang.reflect.Field;
+import java.util.*;
 
 public abstract class Repository<T> {
     protected PostgreSQLConnector connector;
@@ -85,13 +82,12 @@ public abstract class Repository<T> {
             if (repo.connect()) {
                 DMLQuery query = new DMLQuery().from(this.tableName).select("*");
                 AbstractQueryResult res = repo.execute(query);
-                List<T> resL = res.getResultList(clazz);
-                return resL;
+                return res.getResultList(clazz);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Exception message: " + e.getMessage());
         }
-        return null;
+        return Collections.emptyList();
     }
 
     public void save(T entity) {
