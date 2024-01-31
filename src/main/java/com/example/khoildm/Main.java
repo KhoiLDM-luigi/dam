@@ -1,11 +1,11 @@
 package com.example.khoildm;
 
-import java.sql.SQLException;
-import java.util.List;
-
 import com.example.khoildm.ORM.conn_pool.ConnectionPool;
 import com.example.khoildm.dam.SQLConnConfig;
 import com.example.khoildm.dam.factory.connector.PostgreSQLConnectorFactory;
+
+import java.sql.SQLException;
+import java.util.List;
 
 public class Main {
 
@@ -82,6 +82,15 @@ public class Main {
             for (Test2 i : resL) {
                 System.out.println(i.getId() + ": " + i.getName() + ", " + i.getActive() + ", " + i.getValue());
             }
+
+            // Update the entity
+
+            n2.setId(2);
+            n2.setName("test2");
+            n2.setActive(false); // <--- Change this value to false to see the change
+            n2.setValue(1.2);
+
+            repo.save(n2);
 
             // Delete the entity from database
             repo.delete(n2);

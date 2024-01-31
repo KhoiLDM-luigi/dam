@@ -16,8 +16,6 @@
 /Users/thinh.pham/SourceCode/School/dam/src/main/java/com/example/khoildm/dam/query/DMLQuery.java
 /Users/thinh.pham/SourceCode/School/dam/src/main/java/com/example/khoildm/dam/repository/AbstractQueryResult.java
 /Users/thinh.pham/SourceCode/School/dam/src/main/java/com/example/khoildm/dam/Condition.java
-/Users/thinh.pham/SourceCode/School/dam/src/main/java/com/example/khoildm/dam/ORM/Repository.java
-/Users/thinh.pham/SourceCode/School/dam/src/main/java/com/example/khoildm/dam/ORM/Entity.java
 /Users/thinh.pham/SourceCode/School/dam/src/main/java/com/example/khoildm/ORM/conn_pool/ConnectionPool.java
 /Users/thinh.pham/SourceCode/School/dam/src/main/java/com/example/khoildm/dam/where/Like.java
 /Users/thinh.pham/SourceCode/School/dam/src/main/java/com/example/khoildm/dam/Repository.java
